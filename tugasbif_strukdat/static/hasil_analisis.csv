@@ -1,0 +1,6 @@
+Header,Length,GC_Content,GC_Skew
+seq1_low_gc,46,26.09,0.0
+seq2_high_gc,46,86.96,0.0
+seq3_medium_gc,46,47.83,0.0
+seq4_very_high_gc,46,91.3,0.0
+seq5_low_gc,45,0.0,0
