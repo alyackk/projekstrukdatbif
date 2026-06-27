@@ -7,6 +7,22 @@ Pipeline bioinformatika berbasis web untuk analisis sekuens genomik.
 - Visualisasi data statistik (distribusi GC).
 - Ekspor hasil analisis ke format CSV.
 
+## Struktur Folder
+```text
+projekstrukdatbif/
+├── app.py
+├── README.md
+├── static/
+│   ├── dna_video.mp4
+│   ├── foto_bioinfo.jpg
+│   ├── gc_plot.png
+│   ├── hasil_analisis.csv
+│   ├── logo_fmipa.png
+│   └── logo_ipb.png
+└── templates/
+    ├── hasil.html
+    └── index.html
+
 ## Cara Menjalankan
 1. Clone repository ini.
 2. Install dependensi: `pip install flask matplotlib`
