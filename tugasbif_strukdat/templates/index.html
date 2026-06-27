@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pipeline Analisis Sekuens DNA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @keyframes popUp { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
+        #bg-video {
+            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
+            z-index: -1; object-fit: cover; opacity: 0.3; /* Transparansi dinaikkan */
+        }
+
+        body {
+            background: linear-gradient(135deg, #4661F8, #482992);
+            color: #FEFFD9; font-family: 'Poppins', sans-serif;
+            animation: popUp 0.8s ease-out; margin: 0; padding: 20px; min-height: 100vh;
+        }
+
+        .header-images { text-align: center; margin-bottom: 20px; }
+        .header-images img { height: 80px; margin: 0 15px; filter: drop-shadow(0 0 10px rgba(255,0,160,0.5)); }
+
+        .container {
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px);
+            border: 2px solid #FF00A0; border-radius: 40px;
+            padding: 40px; margin: 20px auto; width: 70%; text-align: center;
+        }
+
+        .banner-img {
+            width: 100%; max-height: 200px; object-fit: cover;
+            border-radius: 20px; border: 2px solid #FF00A0; margin-bottom: 20px;
+        }
+
+        /* Label instruksi baru */
+        .input-label { display: block; margin-bottom: 10px; font-weight: 600; color: #FEFFD9; }
+
+        input[type="file"] {
+            background-color: #FEFFD9; color: #482992; padding: 10px 20px;
+            border-radius: 50px; border: none; font-weight: 600; margin-bottom: 20px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #FF00A0, #990060);
+            color: #FEFFD9; border: none; padding: 15px 40px;
+            border-radius: 50px; font-family: 'Poppins', sans-serif;
+            font-weight: 600; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+        }
+        button:hover { box-shadow: 0 0 20px #FF00A0; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='dna_video.mp4') }}" type="video/mp4">
+    </video>
+
+    <div class="header-images">
+        <img src="{{ url_for('static', filename='logo_ipb.png') }}" alt="Logo IPB">
+        <img src="{{ url_for('static', filename='logo_fmipa.png') }}" alt="Logo FMIPA">
+    </div>
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='foto_bioinfo.jpg') }}" alt="Bioinformatics Team" class="banner-img">
+        
+        <h2>Unggah Sekuens Genomik</h2>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label class="input-label">Masukkan file FASTA/FASTQ:</label>
+            <input type="file" name="file_sekuens" accept=".fasta, .fastq, .fa, .fq" required>
+            <br>
+            <button type="submit">Jalankan Analisis</button>
+        </form>
+    </div>
+</body>
+</html>

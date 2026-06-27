@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Analisis Bioinformatika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @keyframes popUp { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
+        #bg-video {
+            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
+            z-index: -1; object-fit: cover; opacity: 0.3;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4661F8, #482992);
+            color: #FEFFD9; font-family: 'Poppins', sans-serif;
+            animation: popUp 0.8s ease-out; margin: 0; padding: 20px; min-height: 100vh;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px);
+            border: 2px solid #FF00A0; border-radius: 40px;
+            padding: 40px; margin: 40px auto; width: 85%; text-align: center;
+        }
+
+        table {
+            width: 100%; border-collapse: collapse; margin: 30px 0;
+            background: rgba(255, 255, 255, 0.05); border-radius: 20px; overflow: hidden;
+        }
+        th { background: #990060; padding: 15px; border: 1px solid #FF00A0; }
+        td { padding: 12px; border: 1px solid #FF00A0; }
+
+        .plot-container img { max-width: 80%; border: 3px solid #FF00A0; border-radius: 20px; box-shadow: 0 0 20px #FF00A0; }
+        .btn {
+            background: linear-gradient(45deg, #FF00A0, #990060); color: #FEFFD9;
+            text-decoration: none; padding: 15px 30px; margin: 10px;
+            border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.1); box-shadow: 0 0 20px #FF00A0; }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='dna_video.mp4') }}" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <h2>Laporan Analisis Komputasi</h2>
+        
+        <h3>Top 3 Sekuens dengan GC Content Tertinggi</h3>
+        <table>
+            <tr><th>Header</th><th>Length (bp)</th><th>GC Content (%)</th><th>GC Skew</th></tr>
+            {% for item in top_3 %}
+            <tr>
+                <td>{{ item.header[:30] }}...</td>
+                <td>{{ item.length }}</td>
+                <td>{{ "%.2f"|format(item.gc_content) }}</td>
+                <td>{{ item.gc_skew }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Distribusi GC Content</h3>
+        <div class="plot-container">
+            <img src="{{ url_for('static', filename='gc_plot.png') }}" alt="Grafik Distribusi GC">
+        </div>
+
+        <div>
+            <a href="{{ url_for('static', filename='hasil_analisis.csv') }}" class="btn">Unduh Laporan CSV</a>
+            <a href="/" class="btn">Analisis Data Baru</a>
+        </div>
+    </div>
+</body>
+</html>
